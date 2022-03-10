@@ -154,4 +154,6 @@ e to %
 ' ' to ||
 z to +
 , to * 
+console.log(zakodowanyCytat.replace(/[#]/g,"a").replace(/[%]/g,"e").replace(/[||]/g," ").replace(/[+]/g,"z").replace(/[*]/g,","))
+console.log(zakodowanyCytat)
 */
