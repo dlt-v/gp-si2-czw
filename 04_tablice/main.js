@@ -135,5 +135,11 @@ poziom
 > 30 (r)
 40 * 1 = 40
 30 * 1.5 = 45
-95 
+95
+
+let punktyR = Number(prompt('Podaj ilość procentów z matury rozszerzonej:'))
+let punktyP = Number(prompt('Podaj ilość procentów z matury podstawowej:'))
+let tablica = [punktyR*1.5, punktyP]
+let iloscPunktow = tablica[0] + tablica[1]
+console.log(iloscPunktow)
 */
