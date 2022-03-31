@@ -81,13 +81,76 @@ let biurkoRomka = {
     },
 };
 
-biurkoRomka.sprawdzSzuflade();
-biurkoRomka.wlozDoSzuflady('telefon');
-biurkoRomka.sprawdzSzuflade();
-biurkoRomka.wlozDoSzuflady('piórnik');
-biurkoRomka.sprawdzSzuflade();
-biurkoRomka.wlozDoSzuflady('książka');
-biurkoRomka.sprawdzSzuflade();
+// biurkoRomka.sprawdzSzuflade();
+// biurkoRomka.wlozDoSzuflady('telefon');
+// biurkoRomka.sprawdzSzuflade();
+// biurkoRomka.wlozDoSzuflady('piórnik');
+// biurkoRomka.sprawdzSzuflade();
+// biurkoRomka.wlozDoSzuflady('książka');
+// biurkoRomka.sprawdzSzuflade();
 
-wyciagnietyPrzedmiot = biurkoRomka.wyjmijZSzuflady(2);
-console.log(wyciagnietyPrzedmiot);
+// wyciagnietyPrzedmiot = biurkoRomka.wyjmijZSzuflady(2);
+// console.log(wyciagnietyPrzedmiot);
+
+/* Zadanie
+
+Utwórz obiekt, w którym opiszesz 5 właściwości oraz dodasz 3 metody manipulujące tymi właściowościami.
+np. Pies
+
+let kuchenka = {
+  
+  stopnieC: 0,
+  iloscGrzalek:1,
+  
+  zwiekszTemperature: function(zwiekszO){
+    this.stopnieC += zwiekszO;
+  },
+  
+  zmniejszTemperature: function(zmniejszO){
+    this.stopnieC -= zmniejszO;
+  },
+  pokazTemperature: function(){
+    console.log("Temperatura kuchenki wynosi: " +this.stopnieC+" stopni Celsjusza");
+  }
+}
+
+kuchenka.pokazTemperature();
+kuchenka.zwiekszTemperature(Number(prompt("O ile chcesz zwiększyć temperaturę?")));
+kuchenka.pokazTemperature();
+kuchenka.zmniejszTemperature(Number(prompt("O ile chcesz zmniejszyć temperaturę?")));
+kuchenka.pokazTemperature();
+*/
+let piesTomka = {
+    imie: 'Kala',
+    rasa: 'mieszana',
+    rozmiar: 'mały',
+    ulubioneJedzenie: 'spaghetti',
+    wysokoscSkoku: 'niska',
+
+    jedz: function (typJedzenia) {
+        if (typJedzenia == this.ulubioneJedzenie) {
+            console.log(`${this.imie} zjadła ${typJedzenia} i jej smakowało!`);
+        } else {
+            console.log(
+                `${this.imie} zjadła ${typJedzenia} i jej nie zasmakowało!`
+            );
+        }
+    },
+    trenuj: function () {
+        if (this.wysokoscSkoku == 'niska') {
+            this.wysokoscSkoku = 'wysoka';
+            console.log(`${this.imie} jest teraz na treningu!`);
+        } else {
+            console.log(`${this.imie} jest już wytrenowana!`);
+        }
+    },
+};
+// piesTomka.jedz('spaghetti');
+// piesTomka.jedz('bigos');
+
+// console.log(piesTomka.wysokoscSkoku);
+// piesTomka.trenuj();
+// piesTomka.trenuj();
+console.log(piesTomka.wysokoscSkoku);
+piesTomka.wysokoscSkoku = 'wysoka';
+console.log(piesTomka.wysokoscSkoku);
