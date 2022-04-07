@@ -1,0 +1,14 @@
+p {
+    color: red;
+    border: 2px solid red;
+}
+.para-class {
+    color: blue;
+}
+#para-id {
+    color: green;
+    
+}
+img {
+    display: block;
+}
