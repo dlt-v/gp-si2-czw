@@ -8,7 +8,6 @@ body {
 }
 #dodajElement {
     margin: 0px auto 0px auto;
-    width: 1000px;
     text-align: center;
     padding: 10px;
 }
@@ -49,7 +48,7 @@ h1 {
     height: 50px;
     background-color: #fa4a0a;
     color: white;
-    padding: 15px 32px;
+    padding: 15px 28px;
     font-size: 16px;
     border-radius: 4px;
     transition-duration: 0.4s;
