@@ -25,6 +25,8 @@ przyciskOk.addEventListener('click', sprawdzLitere);
 
 // zmienne globalne
 let wyraz = '';
+let odgadnieteLitery = [];
+let uzyteLitery = [];
 
 function naStart() {
     // wylosuj słowo z tablicy wyrazy
@@ -33,8 +35,14 @@ function naStart() {
 }
 
 function wydrukujWyraz() {
+    gra.innerHTML = '';
     for (let i = 0; i < wyraz.length; i++) {
-        gra.innerHTML += '_';
+        // Jeżeli w odganietych literach znajduje się litera to ją wydrukuj.
+        if (odgadnieteLitery.includes(wyraz[i])) {
+            gra.innerHTML += wyraz[i];
+        } else {
+            gra.innerHTML += '_';
+        }
     }
 }
 
@@ -46,13 +54,20 @@ function sprawdzLitere() {
         komunikat.innerHTML = 'Nie możesz podać pustego pola.';
         return;
     }
+    // Sprawdź czy ta litera została już użyta
+    if (uzyteLitery.includes(litera)) {
+        komunikat.innerHTML = `Litera "${litera}" została już użyta.`;
+        return;
+    } else {
+        uzyteLitery.push(litera);
+    }
 
     // Sprawdź czy litera występuje w wylosowanym wyrazie
-    if (litera in wyraz) {
-        console.log('Litera występuje w wyrazie.');
+    if (wyraz.includes(litera)) {
+        odgadnieteLitery.push(litera);
     }
     komunikat.innerHTML = '';
-    console.log(litera);
+    wydrukujWyraz();
 }
 
 naStart();
