@@ -36,14 +36,17 @@ function naStart() {
 
 function wydrukujWyraz() {
     gra.innerHTML = '';
+    let wygrana = true;
     for (let i = 0; i < wyraz.length; i++) {
         // Jeżeli w odganietych literach znajduje się litera to ją wydrukuj.
         if (odgadnieteLitery.includes(wyraz[i])) {
             gra.innerHTML += wyraz[i];
         } else {
             gra.innerHTML += '_';
+            wygrana = false;
         }
     }
+    return wygrana;
 }
 
 function sprawdzLitere() {
@@ -67,7 +70,18 @@ function sprawdzLitere() {
         odgadnieteLitery.push(litera);
     }
     komunikat.innerHTML = '';
-    wydrukujWyraz();
+    if (wydrukujWyraz()) {
+        komunikat.innerHTML = 'Brawo, wygrałeś!';
+    }
+
+    //Rozwiązanie Emila
+    // if (gra.innerHTML == wyraz) {
+    //     komunikat.innerHTML = 'Brawo, wygrałeś!';
+    // }
 }
 
 naStart();
+
+/*
+    Zaimplentuj funkcjonalność, która sprawdza czy zgadneliśmy cały wyraz i jeżeli tak to poinformuj użytkownika w komunikacie.
+*/
