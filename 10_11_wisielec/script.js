@@ -20,13 +20,21 @@ const przyciskOk = document.querySelector('#przycisk-ok');
 const przyciskReset = document.querySelector('#przycisk-reset');
 const obrazek = document.querySelector('img');
 const komunikat = document.querySelector('#komunikat');
+const pGracz = document.querySelector('#pGracz');
+const pKomputer = document.querySelector('#pKomputer');
 
 przyciskOk.addEventListener('click', sprawdzLitere);
+przyciskReset.addEventListener('click', zresetuj);
 
 // zmienne globalne
 let wyraz = '';
 let odgadnieteLitery = [];
 let uzyteLitery = [];
+let zycia = tabObrazki.length - 1; // 11
+let gracz = 0;
+let komputer = 0;
+pGracz.innerHTML = gracz;
+pKomputer.innerHTML = komputer;
 
 function naStart() {
     // wylosuj słowo z tablicy wyrazy
@@ -51,12 +59,14 @@ function wydrukujWyraz() {
 
 function sprawdzLitere() {
     let litera = input.value.toLowerCase();
+    input.value = '';
 
     if (!litera) {
-        console.log('Input jest pusty!');
+        // console.log('Input jest pusty!');
         komunikat.innerHTML = 'Nie możesz podać pustego pola.';
         return;
     }
+
     // Sprawdź czy ta litera została już użyta
     if (uzyteLitery.includes(litera)) {
         komunikat.innerHTML = `Litera "${litera}" została już użyta.`;
@@ -66,22 +76,81 @@ function sprawdzLitere() {
     }
 
     // Sprawdź czy litera występuje w wylosowanym wyrazie
+    komunikat.innerHTML = '';
     if (wyraz.includes(litera)) {
         odgadnieteLitery.push(litera);
+    } else {
+        // Litera jest niepoprawna
+
+        zycia -= 1;
+        console.log(`Życia: ${zycia}`);
+
+        obrazek.style.display = 'block';
+        if (zycia < 0) {
+            //użytkownik przegrał
+            komunikat.innerHTML = `Przegrałeś! Poprawne hasło to ${wyraz}.\nNaciśnij "reset", by zacząć od nowa.`; // \n - new line
+            przyciskOk.disabled = true;
+            przyciskOk.style.backgroundColor = '#6c6c6c';
+            komputer += 1;
+            pKomputer.innerHTML = komputer;
+        } else {
+            obrazek.src = tabObrazki[zycia];
+        }
     }
-    komunikat.innerHTML = '';
     if (wydrukujWyraz()) {
         komunikat.innerHTML = 'Brawo, wygrałeś!';
+        gracz += 1;
+        pGracz.innerHTML = gracz;
     }
 
-    //Rozwiązanie Emila
+    // SINGLE SOURCE OF TRUTH
+    // Rozwiązanie Emila
     // if (gra.innerHTML == wyraz) {
     //     komunikat.innerHTML = 'Brawo, wygrałeś!';
     // }
 }
 
+function zresetuj() {
+    przyciskOk.disabled = false;
+    przyciskOk.style.backgroundColor = '#fa4a0a';
+    obrazek.style.display = 'none';
+    console.log('Reset gry.');
+    // DRY - Don't Repeat Yourself - Nie powtarzaj się
+    odgadnieteLitery = [];
+    uzyteLitery = [];
+    zycia = tabObrazki.length - 1;
+
+    naStart();
+    komunikat.innerHTML = 'Zresetowano grę.';
+    input.value = '';
+}
+
 naStart();
 
 /*
-    Zaimplentuj funkcjonalność, która sprawdza czy zgadneliśmy cały wyraz i jeżeli tak to poinformuj użytkownika w komunikacie.
+Zadanie:
+Dodaj punkty gracza i komputera:
+gracz dostaje punkt gdy zgadnie wyraz
+koputer dostaje punkty gdy gracz przegra
+
+punkty są wyświetlane w dowolnym miejscu na strone.
+*/
+/*
+Życia:
+za każdym razem gdy nowo wprowadzona litera nie znajduje się w wyrazie to odejmujemy 1 życie.
+Kiedy życie zostanie odjęte, zastępujemy lub dodajemy obrazek odpowiadający ilościom żyć.
+
+Kiedy życia dobiegną końca to zablokujemy graczowi możliwość grania dalej 
+
+oraz poinformujemy użytkownika że przegrał.
+
+Możliwość wyświetlenia innego specjalnego obrazka.
+*/
+
+/*
+Przycisk reset
+Po naciśnięciu powinien:
+- zresetuj wyraz do losowania - wylosuj nowy
+- wyczyść wyświetlany napis
+- wyczyść input
 */
