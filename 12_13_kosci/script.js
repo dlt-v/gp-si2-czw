@@ -61,6 +61,9 @@ przyciskRzuc.addEventListener('click', () => {
         kosc.src = obrazki[liczbaOczek - 1];
         kosc.style.display = 'block';
     }
+    if (liczbaOczek != 1) {
+        punktyRundy += liczbaOczek;
+    }
 });
 
 /*
