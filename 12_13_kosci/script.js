@@ -19,6 +19,7 @@ const nazwaGracz1 = document.querySelector('#nazwa-1');
 const panelGracz0 = document.querySelector('.gracz-0-panel');
 const panelGracz1 = document.querySelector('.gracz-1-panel');
 const przyciskRzuc = document.querySelector('.btn-rzuc');
+const przyciskZatrzymaj = document.querySelector('.btn-zatrzymaj');
 
 const obrazki = [
     'https://cdn.glitch.com/8fbc579f-3346-47a0-abbc-945a83abb962%2Fkosc-1.png?v=1610038358032',
@@ -91,3 +92,26 @@ function nastepnyGracz() {
     aktualnePunkty0.textContent = '0';
     aktualnePunkty1.textContent = '0';
 }
+
+przyciskZatrzymaj.addEventListener('click', () => {
+    if (czyMoznaGrac) {
+        punkty[aktualnyGracz] += punktyRundy;
+    }
+    if (aktualnyGracz) {
+        wynikGracz1.textContent = punkty[aktualnyGracz];
+    } else {
+        wynikGracz0.textContent = punkty[aktualnyGracz];
+    }
+
+    if (punkty[aktualnyGracz] >= 100) {
+        czyMoznaGrac = false;
+
+        if (aktualnyGracz) {
+            panelGracz1.classList.add('zwyciestwo');
+        } else {
+            panelGracz0.classList.add('zwyciestwo');
+        }
+    }
+
+    nastepnyGracz();
+});
