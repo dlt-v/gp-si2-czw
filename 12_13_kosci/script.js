@@ -56,23 +56,38 @@ function nowaGra() {
 nowaGra();
 
 przyciskRzuc.addEventListener('click', () => {
+    let liczbaOczek = 0;
     if (czyMoznaGrac) {
-        let liczbaOczek = Math.floor(Math.random() * 5) + 1;
+        liczbaOczek = Math.floor(Math.random() * 5) + 1;
         kosc.src = obrazki[liczbaOczek - 1];
         kosc.style.display = 'block';
     }
     if (liczbaOczek != 1) {
         punktyRundy += liczbaOczek;
+        if (aktualnyGracz) {
+            aktualnePunkty1.textContent = punktyRundy;
+        } else {
+            aktualnePunkty0.textContent = punktyRundy;
+        }
+    } else {
+        nastepnyGracz();
     }
 });
 
-/*
-1.Dodaj event listener od klikania do przycisku z klasą "btn-rzuc"
-2. Sprawdz czy zmienna czyMoznaGrac jest prawdziwa, jeżeli tak:
-    3. wylosuj do nowej zmiennej liczbę oczek za pomocą Math.random 1-6
-    4. pokaż w elemencie html o klacie "kosc" obrazek z tablicy o tej samej ilości oczek
-    Math.random()   0 - 1 (np. 0.214234)
-    Math.random() * 5     0 - 5 (np. 3.2342424)
-    Math.round() | Math.floor() | Math.ceil()
-
-*/
+function nastepnyGracz() {
+    // Zmień aktualnego gracza na następny.
+    if (aktualnyGracz) {
+        aktualnyGracz = 0;
+        panelGracz1.classList.remove('aktywny');
+        panelGracz0.classList.add('aktywny');
+    } else {
+        aktualnyGracz = 1;
+        panelGracz0.classList.remove('aktywny');
+        panelGracz1.classList.add('aktywny');
+    }
+    // Wyzeruj punkty rundy (zmienna)
+    punktyRundy = 0;
+    // Aktualne punkty w HTML również chcemy wyzerować.
+    aktualnePunkty0.textContent = '0';
+    aktualnePunkty1.textContent = '0';
+}
