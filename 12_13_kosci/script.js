@@ -4,7 +4,7 @@ let punktyRundy = 0;
 // Gracz = 0
 // Komputer = 1
 let aktualnyGracz = 0;
-
+let punktyMax = 1;
 let czyMoznaGrac = true;
 
 //Zapisywanie elementów UI
@@ -53,15 +53,23 @@ function nowaGra() {
     panelGracz0.classList.remove('aktywny');
     panelGracz0.classList.add('aktywny');
     panelGracz1.classList.remove('aktywny');
+
+    panelGracz0.classList.remove('zwyciestwo');
+    panelGracz1.classList.remove('zwyciestwo');
 }
 nowaGra();
 
 przyciskRzuc.addEventListener('click', () => {
     let liczbaOczek = 0;
     if (czyMoznaGrac) {
+
+        document.querySelector('.punkty-max').style.display = 'none';
+        punktyMax = document.getElementById('wartosc').value;
+
         liczbaOczek = Math.floor(Math.random() * 5) + 1;
         kosc.src = obrazki[liczbaOczek - 1];
         kosc.style.display = 'block';
+        
     }
     if (liczbaOczek != 1) {
         punktyRundy += liczbaOczek;
@@ -103,15 +111,20 @@ przyciskZatrzymaj.addEventListener('click', () => {
         wynikGracz0.textContent = punkty[aktualnyGracz];
     }
 
-    if (punkty[aktualnyGracz] >= 100) {
+    if (punkty[aktualnyGracz] >= 15) {
         czyMoznaGrac = false;
 
         if (aktualnyGracz) {
             panelGracz1.classList.add('zwyciestwo');
+            nazwaGracz1.innerHTML = 'Zwycięzca';
         } else {
             panelGracz0.classList.add('zwyciestwo');
+            nazwaGracz0.innerHTML = 'Zwycięzca';
         }
     }
 
     nastepnyGracz();
 });
+// 1. Przypisać zdarzenie do przycisku "Nowa Gra" i dopisać do niego funkcę nowaGra.
+const nowaGraBtn = document.querySelector('.btn-nowa-gra');
+nowaGraBtn.addEventListener('click', nowaGra);
